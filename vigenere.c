@@ -3,26 +3,26 @@
 #include <string.h>
 void encrypt(char *plaintext, char *key, char *ciphertext)
 {
-  int i, j, offset;
-  i = 0;
-  j = 0;
+  int    i   ;
+  int    j   ;
+  int offset ;
+  i =    0   ;
+  j =    0   ;
   while(plaintext[i] != '\n' && plaintext[i] != '\0')
   {
     offset = key[j] -(int)('a');
-    if(plaintext[i] <= 'Z' && plaintext[i] >='A')
-    {
-      printf("plaintext[%d]=%c \n", i, plaintext[i]);
-      char c;
-      //printf("i = %d, %c\n", i, plaintext[i]);
-
-      //plaintext[i] = 's';// why it can't work??
-
-      //plaintext[i] = (char)((int)plaintext[i] + 0);
-      //c = (char)((int)plaintext[i] + 0);
-     // memcpy(&c,&plaintext[i],1);
-      //plaintext[i] = c;
-      printf("plaintext[%d]=%c \n", i, plaintext[i]);
-    }
+//    if(plaintext[i] <= 'Z' && plaintext[i] >='A')
+//    {
+//      printf("plaintext[%d]=%c \n", i, plaintext[i]);
+//      char c;
+//      printf("i = %d, %c\n", i, plaintext[i]);
+//      plaintext[i] = 's';// why it can't work??
+//      plaintext[i] = (char)((int)plaintext[i] + 0);
+//      c = (char)((int)plaintext[i] + 0);
+//      memcpy(&c,&plaintext[i],1);
+//      plaintext[i] = c;
+//      printf("plaintext[%d]=%c \n", i, plaintext[i]);
+//    }
     ciphertext[i] = (int)('a') + (plaintext[i] - (int)'a' + offset) % 26;
     i++;
     j++;
@@ -33,29 +33,38 @@ void encrypt(char *plaintext, char *key, char *ciphertext)
   }
 } 
 
-void get_divisor(char *p);
-void get_divisor(char *p)
+void get_divisor(int *p, int num)
 {
+  int i;
+  int j;
+  for(i = 2; i < num; i++)
+  {
+    if(num%i == 0)
+    {
+      p[i-1] = 1;
+      j = num / i;
+      p[j-1] = 1;
+     // printf("get %d %d\n", i , j);
+    }
+  }
   
 }
+
+/* to avoid noice, get_key_size() calculates the weight of each possible keys and the result is    *
+ * more precise than get_key_size_02, which just calculates the same divisor of all possible keys */
 int get_key_size(char* ciphertext)
 {
+  int size = 0;
   int i;
   int m;
   int j, k;
   int len = strlen(ciphertext);
   int *keysize = malloc(sizeof(int)*strlen(ciphertext));
-  memset(keysize, 0, sizeof(int)*strlen(ciphertext)); // is possible key size is 27, set keysize[26]=1; 
-  //keysize(strlen(keyseize) -1 ) = '\0';
+  memset(keysize, 0, sizeof(int)*strlen(ciphertext)); // if possible key size is 27, set keysize[26]=1; 
   k = 0; //the count of possible key_size
   for(m = 1; m < len/2 ; m++)
   {
     int block_num = len -m;
-    //int *block_start_pos = malloc(sizeof(int)*block_num);
-    //for(i = 0; i < block_num; i++)
-    //{
-    //  block_start_pos[i] = i;
-    //}
     for(i = 0; i < block_num; i++)
     {
       char *block_1 = malloc(sizeof(char)*m + 2);
@@ -77,55 +86,168 @@ int get_key_size(char* ciphertext)
       }
       free(block_1);
     }
-    //free(block_start_pos);
   }
-  //k = 0;
-  //for(i = 0; i< strlen(keysize); i++)
-  //{
-  //   if(keysize[i] == '1')
-  //   {
-  //      k++;
-  //   }
-  //}
-  char **ptr = malloc(sizeof(char*)*k);
+
+  /* from code above, we know all possible key sizes (count: k), which are stored in keysize array *
+   * if possible key size is 27, then keysize[26]=1;                                               */
+
+
+  /* get max number of key size, to malloc the array, each possible key size will be split as an   *
+   * array ptr[i] and be added with an all-0 array: weight, from the weight of each key, we know   *
+   * the most possible keysize                                                                     */
+  int **ptr = malloc(sizeof(int*)*k);
+  int max = 0;
   for(i = 0; i < k; i++)
   {
      int num = keysize[i];
-     ptr[i] = malloc(sizeof(char)*(num + 1));
-     memset(ptr[i], '0', num);
-     ptr[i][num-1]   = '1' ;
-     ptr[i][num] = '\0';
-    /* at first, ptr[i] = "00000....001\0", after get_divisor, ptr[i] = "0..1..00..100..1..1\0",
-     where 1 means the pos is the divisor number of keysize[i]*/
-     get_divisor(ptr[i]);
+     max = (max > num)? max : num;
   }
-  //free
+
+  int *weight = malloc(sizeof(int) * max);
+  memset(weight, 0, max);
+
+  for(i = 0; i < k; i++)
+  {
+     int num = keysize[i];
+     ptr[i] = malloc(sizeof(int)*max);
+     memset(ptr[i], 0, max);
+     ptr[i][num-1]   = 1 ;
+
+     /* at first, ptr[i] = "00000...00100..", after get_divisor, ptr[i] = "0..1..00..100..1..100...", *
+     * where 1 means the match pos is the divisor number of keysize[i]                               */
+     get_divisor(ptr[i], num);
+     for(j = 0; j < max; j++)
+     {
+       weight[j] = weight[j] + ptr[i][j];
+     }
+  }
+  int max_weight = 0;
+  
+  for(j = 0; j < max; j++)
+  {
+    if(max_weight < weight[j])
+    {
+      size = j+1;
+      max_weight = weight[j];
+    }
+  }
+  
   for(i = 0; i < k; i++)
   {
     free(ptr[i]);
   }  
   free(keysize);
-  return 0;
+  free(weight);
+  return size;
+}
+
+
+
+int get_key_size_02(char* ciphertext)
+{
+  int size = 0;
+  int i;
+  int m;
+  int j, k;
+  int len = strlen(ciphertext);
+  int *keysize = malloc(sizeof(int)*strlen(ciphertext));
+  memset(keysize, 0, sizeof(int)*strlen(ciphertext)); // if possible key size is 27, set keysize[26]=1; 
+  k = 0; //the count of possible key_size
+  for(m = 1; m < len/2 ; m++)
+  {
+    int block_num = len -m;
+    for(i = 0; i < block_num; i++)
+    {
+      char *block_1 = malloc(sizeof(char)*m + 2);
+      memset(block_1, '\0', strlen(block_1));
+      memcpy(block_1, ciphertext + i, m+1);
+      for(j = i + 1 + m; j < block_num; j++)
+      {
+        if(j >= block_num) break;
+        char *block_2 = malloc(sizeof(char)*m + 2);
+        memset(block_2, '\0', strlen(block_2));
+        memcpy(block_2, ciphertext + j, m+1);
+        if(strcmp(block_1, block_2) == 0)
+        {
+           printf("found same block: %s at %d and %d, size: %d\n", block_1, i, j, j-i);
+           keysize[k] = j-i;
+           k++;
+        }
+        free(block_2);
+      }
+      free(block_1);
+    }
+  }
+
+  /* from code above, we know all possible key sizes (count: k), which are stored in keysize array *
+   * if possible key size is 27, then keysize[26]=1;                                               */
+
+
+  /* get max number of key size, to malloc the array, each possible key size will be split as an   *
+   * array ptr[i] and be compared with an all-1 array: result                                      */
+  int **ptr = malloc(sizeof(int*)*k);
+  int max = 0;
+  for(i = 0; i < k; i++)
+  {
+     int num = keysize[i];
+     max = (max > num)? max : num;
+  }
+
+  int *result = malloc(sizeof(int) * max);
+  memset(result, 0xff, max);
+
+  for(i = 0; i < k; i++)
+  {
+     int num = keysize[i];
+     ptr[i] = malloc(sizeof(int)*max);
+     memset(ptr[i], 0, max);
+     ptr[i][num-1]   = 1 ;
+
+  /* at first, ptr[i] = "00000...00100..", after get_divisor, ptr[i] = "0..1..00..100..1..100...", *
+   * where 1 means the match pos is the divisor number of keysize[i]                               */
+     get_divisor(ptr[i], num);
+     for(j = 0; j < max; j++)
+     {
+       result[j] = result[j] && ptr[i][j];
+     }
+  }
+  for(j = 0; j < max; j++)
+  {
+    if(result[j] != 0)
+      {
+        size = j+1;
+        //printf("keysize = %d\n", j+1);
+      }
+  }
+  
+  for(i = 0; i < k; i++)
+  {
+    free(ptr[i]);
+  }  
+  free(keysize);
+  free(result);
+  return size;
 }
 int main()
 {
   char *plaintext = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodpalce";
   char *ciphertext;
-  char *key = "xyz";
+  char *key;
   int i;
+  int keysize;
+  printf("please input the key\n");
+  for(i = 0,key = (char*)malloc(1); (*(key + i) = getchar()) != '\n'; i++)
+  {
+    key=(char*)realloc(key,strlen(key)+1);
+  }
+  *(key+i)='\0';
   ciphertext = malloc(strlen(plaintext) + 1);
   memset(ciphertext, '\0', strlen(ciphertext));
   encrypt(plaintext, key, ciphertext);
-  printf("             ");
-  for(i = 0; i< strlen(ciphertext); i++)
-  {
-      printf("%d", i);
-  }
-  printf("\n");
   printf("plaintext  = %s, key = %s\n", plaintext, key);
   printf("ciphertext = %s\n", ciphertext);
-  get_key_size(ciphertext);
-  //get_key_size(plaintext);
+  keysize = get_key_size(ciphertext);
+  printf("after calculating, keysize = %d\n",keysize);
   free(ciphertext);
   return 0;
 }
