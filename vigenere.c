@@ -1,3 +1,6 @@
+/* Written by Xiongmin Lin <linxiongmin@gmail.com>, ISIMA, Clermont-Ferrand *
+ * (c) 2014. All rights reserved.                                           */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,13 +40,13 @@ void get_divisor(int *p, int num)
 {
   int i;
   int j;
-  for(i = 2; i < num; i++)
+  for(i = 3; i < num; i++)
   {
     if(num%i == 0)
     {
       p[i-1] = 1;
-      j = num / i;
-      p[j-1] = 1;
+      //j = num / i;
+      //p[j-1] = 1;
      // printf("get %d %d\n", i , j);
     }
   }
@@ -125,6 +128,7 @@ int get_key_size(char* ciphertext)
   
   for(j = 0; j < max; j++)
   {
+    printf("weight of %d: %d\n", j+1, weight[j]);
     if(max_weight < weight[j])
     {
       size = j+1;
@@ -228,26 +232,72 @@ int get_key_size_02(char* ciphertext)
   free(result);
   return size;
 }
+void decrypt(char *ciphertext, char *key, char* plaintext)
+{
+  int    i   ;
+  int    j   ;
+  int offset ;
+  i =    0   ;
+  j =    0   ;
+  while(ciphertext[i] != '\n' && ciphertext[i] != '\0')
+  {
+    offset = key[j] -(int)('a');
+    if((ciphertext[i] - (int)'a' - offset) < 0)
+    {
+      plaintext[i] = ciphertext[i] - offset + 26;
+    }
+    else
+    { 
+      plaintext[i] = ciphertext[i] - offset;  //it seems that we can't modify plaintext
+    }
+    i++;
+    j++;
+    if(key[j] == '\n' || key[j] == '\0')
+    {
+      j = 0;
+    }
+  }
+
+}
 int main()
 {
-  char *plaintext = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodpalce";
+  //char *plaintext = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodplace";// if declare in this way , i can't modify it
+  //char plaintext[100] = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodplace"; // OK
+  char *plaintext;
   char *ciphertext;
   char *key;
   int i;
   int keysize;
+
+  printf("please input plaintext \n");
+  for(i = 0, plaintext = malloc(1); (*(plaintext + i) = getchar()) != '\n'; i++)
+  {
+    plaintext = (char*)realloc(plaintext, strlen(plaintext)+1);
+  }
+  plaintext[i] = '\0';
+
   printf("please input the key\n");
   for(i = 0,key = (char*)malloc(1); (*(key + i) = getchar()) != '\n'; i++)
   {
     key=(char*)realloc(key,strlen(key)+1);
   }
   *(key+i)='\0';
+  
   ciphertext = malloc(strlen(plaintext) + 1);
   memset(ciphertext, '\0', strlen(ciphertext));
+  
   encrypt(plaintext, key, ciphertext);
-  printf("plaintext  = %s, key = %s\n", plaintext, key);
-  printf("ciphertext = %s\n", ciphertext);
+  printf("encrype: plaintext  = %s, key = %s\n", plaintext, key);
+  printf("encrype: ciphertext = %s\n", ciphertext);
+  
   keysize = get_key_size(ciphertext);
   printf("after calculating, keysize = %d\n",keysize);
+
+  decrypt(ciphertext, key, plaintext);
+  printf("decrype: ciphertext = %s, key = %s \n", ciphertext, key);
+  printf("decrype: plaintext  = %s\n", plaintext);
+
   free(ciphertext);
+  free(key);
   return 0;
 }
