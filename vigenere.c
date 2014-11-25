@@ -1,5 +1,6 @@
 /* Written by Xiongmin Lin <linxiongmin@gmail.com>, ISIMA, Clermont-Ferrand *
- * (c) 2014. All rights reserved.                                           */
+ * (c) 2014. All rights reserved.                                           *                                           
+ * http://sancy.univ-bpclermont.fr/~guitton/enseignements/admin.html        */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,7 +66,7 @@ int get_key_size(char* ciphertext)
   int *keysize = malloc(sizeof(int)*strlen(ciphertext));
   memset(keysize, 0, sizeof(int)*strlen(ciphertext)); // if possible key size is 27, set keysize[26]=1; 
   k = 0; //the count of possible key_size
-  for(m = 1; m < len/2 ; m++)
+  for(m = 2; m < len/2 ; m++)
   {
     int block_num = len -m;
     for(i = 0; i < block_num; i++)
@@ -258,6 +259,12 @@ void decrypt(char *ciphertext, char *key, char* plaintext)
     }
   }
 
+}
+void modify_plaintext(char *text)
+{
+  int i, j;
+  i = 0;
+//  while(text[i] != '\0')
 }
 int main()
 {
