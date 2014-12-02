@@ -4,6 +4,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+void convert(char *origintext, char *plaintext)
+{
+  int i, j;
+  i = 0;
+  j = 0;
+  //char *plaintext = (char*) malloc(100);
+  memset(plaintext, '\0', strlen(plaintext));
+  while(origintext[i] != '\0')
+  {
+    
+    if((j+1) % 100 == 0)
+    {
+      plaintext = (char*)realloc(plaintext, strlen(plaintext) + 100);
+      memset(&plaintext[j], '\0', 100);
+    }
+    if(origintext[i] <= 'Z' && origintext[i] >= 'A')
+    {
+      plaintext[j] = origintext[i] + 32;
+      j++;
+    }
+    if(origintext[i] <= 'z' && origintext[i] >= 'a')
+    {
+      plaintext[j] = origintext[i];
+      j++;
+    }
+    i++;
+  }
+  
+}
 void encrypt(char *plaintext, char *key, char *ciphertext)
 {
   int    i   ;
@@ -14,18 +43,10 @@ void encrypt(char *plaintext, char *key, char *ciphertext)
   while(plaintext[i] != '\n' && plaintext[i] != '\0')
   {
     offset = key[j] -(int)('a');
-//    if(plaintext[i] <= 'Z' && plaintext[i] >='A')
-//    {
-//      printf("plaintext[%d]=%c \n", i, plaintext[i]);
-//      char c;
-//      printf("i = %d, %c\n", i, plaintext[i]);
-//      plaintext[i] = 's';// why it can't work??
-//      plaintext[i] = (char)((int)plaintext[i] + 0);
-//      c = (char)((int)plaintext[i] + 0);
-//      memcpy(&c,&plaintext[i],1);
-//      plaintext[i] = c;
-//      printf("plaintext[%d]=%c \n", i, plaintext[i]);
-//    }
+    if(plaintext[i] <= 'Z' && plaintext[i] >='A')
+    {
+      plaintext[i] = plaintext[i] + 32 ;
+    }
     ciphertext[i] = (int)('a') + (plaintext[i] - (int)'a' + offset) % 26;
     i++;
     j++;
@@ -85,9 +106,9 @@ int get_key_size(char* ciphertext)
            keysize[k] = j-i;
            k++;
         }
-        free(block_2);
+        (block_2);
       }
-      free(block_1);
+      (block_1);
     }
   }
 
@@ -138,10 +159,10 @@ int get_key_size(char* ciphertext)
   
   for(i = 0; i < k; i++)
   {
-    free(ptr[i]);
+    (ptr[i]);
   }  
-  free(keysize);
-  free(weight);
+  (keysize);
+  (weight);
   return size;
 }
 
@@ -177,9 +198,9 @@ int get_key_size_02(char* ciphertext)
            keysize[k] = j-i;
            k++;
         }
-        free(block_2);
+        (block_2);
       }
-      free(block_1);
+      (block_1);
     }
   }
 
@@ -226,10 +247,10 @@ int get_key_size_02(char* ciphertext)
   
   for(i = 0; i < k; i++)
   {
-    free(ptr[i]);
+    (ptr[i]);
   }  
-  free(keysize);
-  free(result);
+  (keysize);
+  (result);
   return size;
 }
 void decrypt(char *ciphertext, char *key, char* plaintext)
@@ -263,18 +284,26 @@ int main()
 {
   //char *plaintext = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodplace";// if declare in this way , i can't modify it
   //char plaintext[100] = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodplace"; // OK
+  char *origintext;
   char *plaintext;
   char *ciphertext;
   char *key;
   int i;
   int keysize;
-
-  printf("please input plaintext \n");
-  for(i = 0, plaintext = malloc(1); (*(plaintext + i) = getchar()) != '\n'; i++)
+  origintext = (char*) malloc(100);
+  plaintext = (char*)malloc(100);  
+  printf("please input origin text \n");
+  for(i = 0; (*(origintext + i) = getchar()) != '\n'; i++)
   {
-    plaintext = (char*)realloc(plaintext, strlen(plaintext)+1);
+    if((i+1) % 100 == 0)
+    {
+      origintext = (char*)realloc(origintext, strlen(origintext) + 100);
+    }
+    
+    //plaintext = (char*)realloc(plaintext, strlen(plaintext)+1);
   }
-  plaintext[i] = '\0';
+  origintext[i] = '\0';
+  convert(origintext, plaintext);
 
   printf("please input the key\n");
   for(i = 0,key = (char*)malloc(1); (*(key + i) = getchar()) != '\n'; i++)
@@ -296,8 +325,15 @@ int main()
   decrypt(ciphertext, key, plaintext);
   printf("decrype: ciphertext = %s, key = %s \n", ciphertext, key);
   printf("decrype: plaintext  = %s\n", plaintext);
-
+  
+  free(origintext);
+  printf("free origintext\n");
+  free(plaintext);  
+  printf("free plaintext\n");
   free(ciphertext);
+  printf("free ciphertext\n");
+  
   free(key);
+  printf("free key\n");
   return 0;
 }
