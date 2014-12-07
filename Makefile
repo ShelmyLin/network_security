@@ -7,7 +7,7 @@ OBJ = vigenere.o
 
 
 all : $(OBJ)
-	$(CC) $(OBJ) -o vigenere $(OPT)
+	$(CC) $(OBJ) -o run $(OPT)
 
 vigenere.o : vigenere.c
 	$(CC) -c vigenere.c $(OPT)

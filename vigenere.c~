@@ -87,7 +87,6 @@ int get_key_size(char* ciphertext)
   int *keysize = malloc(sizeof(int)*strlen(ciphertext));
   memset(keysize, 0, sizeof(int)*strlen(ciphertext)); // if possible key size is 27, set keysize[26]=1; 
   k = 0; //the count of possible key_size
-  
   for(m = 2; m < len/2 ; m++)
   {
     int block_num = len -m;
@@ -109,16 +108,11 @@ int get_key_size(char* ciphertext)
            k++;
         }
         free(block_2);
-        //usleep(1);
-        printf("here, m = %d i = %d j = %d\n", m ,i ,j);
       }
       free(block_1);
-      usleep(1);
-      printf("here, m = %d i = %d j = %d\n", m ,i ,j);
     }
-    printf("here, m = %d i = %d j = %d\n", m ,i ,j);
   }
-  printf("here, m = %d i = %d j = %d\n", m ,i ,j);
+
   /* from code above, we know all possible key sizes (count: k), which are stored in keysize array *
    * if possible key size is 27, then keysize[26]=1;                                               */
 
@@ -170,7 +164,6 @@ int get_key_size(char* ciphertext)
   }  
   free(keysize);
   free(weight);
-  free(ptr);
   return size;
 }
 
