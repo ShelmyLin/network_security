@@ -1,0 +1,618 @@
+please input origin text 
+frequency of plaintext: 
+-------------------------------------------
+-> a: 7.692308%
+-> b: 3.180473%
+-> c: 3.550296%
+-> d: 3.402367%
+-> e: 12.943787%
+-> f: 1.479290%
+-> g: 1.701183%
+-> h: 4.659763%
+-> i: 8.505917%
+-> j: 0.073964%
+-> k: 0.739645%
+-> l: 4.363905%
+-> m: 1.479290%
+-> n: 5.621302%
+-> o: 5.917160%
+-> p: 2.884615%
+-> q: 0.073964%
+-> r: 6.730769%
+-> s: 7.248521%
+-> t: 9.615385%
+-> u: 2.440828%
+-> v: 1.331361%
+-> w: 1.923077%
+-> x: 0.147929%
+-> y: 2.292899%
+-> z: 0.000000%
+-------------------------------------------
+please input the key
+encrype: plaintext  = thefirstwelldocumenteddescriptionofapolyalphabeticcipherwasformulatedbyleonbattistaalbertiaroundandusedametalcipherdisctoswitchbetweencipheralphabetsalbertissystemonlyswitchedalphabetsafterseveralwordsandswitcheswereindicatedbywritingtheletterofthecorrespondingalphabetintheciphertextlaterinjohannestrithemiusinhisworkpoligraphiainventedthetabularectaacriticalcomponentofthevigenrecipherthetrithemiuscipherhoweveronlyprovidedaprogressiverigidandpredictablesystemforswitchingbetweencipheralphabetscitationneededwhatisnowknownasthevigenrecipherwasoriginallydescribedbygiovanbattistabellasoinhisbooklacifradelsiggiovanbattistabellasohebuiltuponthetabularectaoftrithemiusbutaddedarepeatingcountersignakeytoswitchcipheralphabetseveryletterwhereasalbertiandtrithemiususedafixedpatternofsubstitutionsbellasosschememeantthepatternofsubstitutionscouldbeeasilychangedsimplybyselectinganewkeykeysweretypicallysinglewordsorshortphrasesknowntobothpartiesinadvanceortransmittedoutofbandalongwiththemessagebellasosmethodthusrequiredstrongsecurityforonlythekeyasitisrelativelyeasytosecureashortkeyphrasesaybyapreviousprivateconversationbellasossystemwasconsiderablymoresecurecitationneededblaisedevigenrepublishedhisdescriptionofasimilarbutstrongerautokeycipherbeforethecourtofhenryiiioffranceinlaterinthethcenturytheinventionofbellasoscipherwasmisattributedtovigenere, key = isimafrance
+encrype: ciphertext = bzmriwjtjgptvwourvngghlwaorngtvqrwxiboqpayrlitmfihticjizoieftimhnebwlnyqvoadeblqetfrlogvbaidozednphckmparvtnngqhpqrizspvsaoqfcmsegyimfkupmvrnntpsjqtxrlogvbaaeyxkezqrtqaiiythrfethpmbjksnhxmjaqvjiayyszvamnijwvvgpwaiewviafmksbqdgpwekxqfofhjcegvizgnfhjtoetiahwzdnegnntpsjqtnetuggqhpqryvxgnebwzunofhnprmkbdiyyezkyaavtixnoemtwdqsrfghvcmvnmztjutugxitcxawvcgcekjqfihrlpqqxgvqnyffgjidaoqnwvcvrlmjbteyiigjiuacecnghrtlwomhewfnyatzgdudjuactsojmesnmeekkqvizduieqkgbsjxexpsggqngzewnkcukrotmfwjvnpktpwzmluyaogxauqfayzoapimvmpwmrtvurwoszobeafvlmnqsesiepktpwziaxfrvimvstxyivsptmjwlnylzoicrjsbfixkaogptsaaisyifdswctmcnwrnfitkqsgnfvnpfilbusyrbrnpikwtegliyvyxgvfhjkaowpijmotfffgtmbzmyizjbhvelvmpawvprcxqfooozetrtwqyvmkjptbuaqlktcnghrtethpmbjksrxizqtqtyvrjjizwieaqseevmiflfrnkhromckceeirfvzilhiftjinbhwctafiyltvqratmxlfjofugpwuqmjrngvlmhiftjinbhwctafiyltvqrauwglisercwqdgohfegrfwqexxygpsrniklqzgfeejmigcmksbvrrvcxakmlqpsvpktwearijoeulwjbbhwrsruovgezttsogjtijbuexznnfzifkqowkrnpwuabfeifugqjjsvpaqfntymbzbtervsfckmtmxlfjofoibzwptmlsegucazqdxkrbpkawkgrnkysqvwftktmvkraeaabuswvlnvmdwtkefjygqwmucdefjhbtxswgbhwrsruegtgmpwvvvqyahzuvfkepqrdwzeayzoaditdieoxjyfviuoiectesvfizsjxyrfrruikmzqcnkagksvfmqdjubycmawlqvnxeatixmjxixyeqjmavmecwzpgksvgnmsndiycvjmbetwfntgvimbakjpcvrlmjjqftiegjikgcdttwhrpvgaquokwrnpgmavxayvrvpxpwbtcjethtcbzmunavngksvgnneqcafqwkaxtewnafomasbfrnsugghbgdugjeeeg
+frequency of ciphertext: 
+-------------------------------------------
+-> a: 4.733728%
+-> b: 3.032544%
+-> c: 2.810651%
+-> d: 1.701183%
+-> e: 5.325444%
+-> f: 4.659763%
+-> g: 4.955621%
+-> h: 2.514793%
+-> i: 5.621302%
+-> j: 4.068047%
+-> k: 3.624260%
+-> l: 2.366864%
+-> m: 4.659763%
+-> n: 4.437870%
+-> o: 3.106509%
+-> p: 3.476331%
+-> q: 4.215976%
+-> r: 4.511834%
+-> s: 3.476331%
+-> t: 5.843195%
+-> u: 2.662722%
+-> v: 5.399408%
+-> w: 4.363905%
+-> x: 2.662722%
+-> y: 2.884615%
+-> z: 2.884615%
+-------------------------------------------
+No.0, found same block: bzm, 2 times
+No.1, found same block: gpt, 1 times
+No.2, found same block: vng, 1 times
+No.3, found same block: ggh, 1 times
+No.4, found same block: rng, 1 times
+No.5, found same block: tvq, 2 times
+No.6, found same block: vqr, 2 times
+No.7, found same block: tmf, 1 times
+No.8, found same block: fih, 1 times
+No.9, found same block: jiz, 1 times
+No.10, found same block: zoi, 1 times
+No.11, found same block: oie, 1 times
+No.12, found same block: fti, 1 times
+No.13, found same block: neb, 1 times
+No.14, found same block: ebw, 1 times
+No.15, found same block: wln, 1 times
+No.16, found same block: lny, 1 times
+No.17, found same block: oad, 1 times
+No.18, found same block: rlo, 1 times
+No.19, found same block: log, 1 times
+No.20, found same block: ogv, 1 times
+No.21, found same block: gvb, 1 times
+No.22, found same block: vba, 1 times
+No.23, found same block: oze, 1 times
+No.24, found same block: ckm, 1 times
+No.25, found same block: mpa, 1 times
+No.26, found same block: gqh, 1 times
+No.27, found same block: qhp, 1 times
+No.28, found same block: hpq, 1 times
+No.29, found same block: pqr, 2 times
+No.30, found same block: izs, 1 times
+No.31, found same block: aoq, 1 times
+No.32, found same block: seg, 1 times
+No.33, found same block: nnt, 1 times
+No.34, found same block: ntp, 1 times
+No.35, found same block: tps, 1 times
+No.36, found same block: psj, 1 times
+No.37, found same block: sjq, 1 times
+No.38, found same block: jqt, 1 times
+No.39, found same block: eth, 2 times
+No.40, found same block: thp, 1 times
+No.41, found same block: hpm, 1 times
+No.42, found same block: pmb, 1 times
+No.43, found same block: mbj, 1 times
+No.44, found same block: bjk, 1 times
+No.45, found same block: jks, 1 times
+No.46, found same block: xmj, 1 times
+No.47, found same block: wvv, 1 times
+No.48, found same block: gpw, 2 times
+No.49, found same block: mks, 1 times
+No.50, found same block: ksb, 1 times
+No.51, found same block: qdg, 1 times
+No.52, found same block: gpw, 1 times
+No.53, found same block: xqf, 1 times
+No.54, found same block: qfo, 1 times
+No.55, found same block: ofh, 1 times
+No.56, found same block: fhj, 2 times
+No.57, found same block: gvi, 1 times
+No.58, found same block: viz, 1 times
+No.59, found same block: gnf, 1 times
+No.60, found same block: fhj, 1 times
+No.61, found same block: gnn, 1 times
+No.62, found same block: tug, 1 times
+No.63, found same block: ugg, 1 times
+No.64, found same block: ggq, 1 times
+No.65, found same block: pqr, 1 times
+No.66, found same block: diy, 1 times
+No.67, found same block: tix, 1 times
+No.68, found same block: cxa, 1 times
+No.69, found same block: awv, 1 times
+No.70, found same block: wvc, 1 times
+No.71, found same block: jqf, 1 times
+No.72, found same block: xgv, 1 times
+No.73, found same block: ffg, 1 times
+No.74, found same block: gji, 2 times
+No.75, found same block: cvr, 1 times
+No.76, found same block: vrl, 1 times
+No.77, found same block: rlm, 1 times
+No.78, found same block: lmj, 1 times
+No.79, found same block: bte, 1 times
+No.80, found same block: gji, 1 times
+No.81, found same block: uac, 1 times
+No.82, found same block: cng, 1 times
+No.83, found same block: ngh, 1 times
+No.84, found same block: ghr, 1 times
+No.85, found same block: hrt, 1 times
+No.86, found same block: wfn, 1 times
+No.87, found same block: gdu, 1 times
+No.88, found same block: dju, 1 times
+No.89, found same block: tso, 1 times
+No.90, found same block: sjx, 1 times
+No.91, found same block: ewn, 1 times
+No.92, found same block: vnp, 1 times
+No.93, found same block: pkt, 2 times
+No.94, found same block: ktp, 1 times
+No.95, found same block: tpw, 1 times
+No.96, found same block: pwz, 1 times
+No.97, found same block: aog, 1 times
+No.98, found same block: ayz, 1 times
+No.99, found same block: yzo, 1 times
+No.100, found same block: zoa, 1 times
+No.101, found same block: imv, 1 times
+No.102, found same block: vmp, 1 times
+No.103, found same block: mpw, 1 times
+No.104, found same block: vlm, 1 times
+No.105, found same block: qse, 1 times
+No.106, found same block: pkt, 1 times
+No.107, found same block: vim, 1 times
+No.108, found same block: ptm, 1 times
+No.109, found same block: sbf, 1 times
+No.110, found same block: kao, 1 times
+No.111, found same block: wct, 2 times
+No.112, found same block: wrn, 1 times
+No.113, found same block: bus, 1 times
+No.114, found same block: rnp, 2 times
+No.115, found same block: gli, 1 times
+No.116, found same block: mbz, 1 times
+No.117, found same block: bzm, 1 times
+No.118, found same block: kjp, 1 times
+No.119, found same block: eth, 1 times
+No.120, found same block: yvr, 1 times
+No.121, found same block: frn, 1 times
+No.122, found same block: rnk, 1 times
+No.123, found same block: hif, 1 times
+No.124, found same block: ift, 1 times
+No.125, found same block: ftj, 1 times
+No.126, found same block: tji, 1 times
+No.127, found same block: jin, 1 times
+No.128, found same block: inb, 1 times
+No.129, found same block: nbh, 1 times
+No.130, found same block: bhw, 3 times
+No.131, found same block: hwc, 1 times
+No.132, found same block: wct, 1 times
+No.133, found same block: cta, 1 times
+No.134, found same block: taf, 1 times
+No.135, found same block: afi, 1 times
+No.136, found same block: fiy, 1 times
+No.137, found same block: iyl, 1 times
+No.138, found same block: ylt, 1 times
+No.139, found same block: ltv, 1 times
+No.140, found same block: tvq, 1 times
+No.141, found same block: vqr, 1 times
+No.142, found same block: qra, 1 times
+No.143, found same block: tmx, 1 times
+No.144, found same block: mxl, 1 times
+No.145, found same block: xlf, 1 times
+No.146, found same block: lfj, 1 times
+No.147, found same block: fjo, 1 times
+No.148, found same block: jof, 1 times
+No.149, found same block: fug, 1 times
+No.150, found same block: pwu, 1 times
+No.151, found same block: bhw, 2 times
+No.152, found same block: svp, 1 times
+No.153, found same block: bhw, 1 times
+No.154, found same block: hwr, 1 times
+No.155, found same block: wrs, 1 times
+No.156, found same block: rsr, 1 times
+No.157, found same block: sru, 1 times
+No.158, found same block: rnp, 1 times
+No.159, found same block: fnt, 1 times
+No.160, found same block: efj, 1 times
+No.161, found same block: svf, 1 times
+No.162, found same block: gks, 2 times
+No.163, found same block: ksv, 2 times
+No.164, found same block: mav, 1 times
+No.165, found same block: gks, 1 times
+No.166, found same block: ksv, 1 times
+No.167, found same block: svg, 1 times
+No.168, found same block: vgn, 1 times
+No.169, found same block: tvqr, 2 times
+No.170, found same block: nebw, 1 times
+No.171, found same block: wlny, 1 times
+No.172, found same block: rlog, 1 times
+No.173, found same block: logv, 1 times
+No.174, found same block: ogvb, 1 times
+No.175, found same block: gvba, 1 times
+No.176, found same block: gqhp, 1 times
+No.177, found same block: qhpq, 1 times
+No.178, found same block: hpqr, 1 times
+No.179, found same block: nntp, 1 times
+No.180, found same block: ntps, 1 times
+No.181, found same block: tpsj, 1 times
+No.182, found same block: psjq, 1 times
+No.183, found same block: sjqt, 1 times
+No.184, found same block: ethp, 1 times
+No.185, found same block: thpm, 1 times
+No.186, found same block: hpmb, 1 times
+No.187, found same block: pmbj, 1 times
+No.188, found same block: mbjk, 1 times
+No.189, found same block: bjks, 1 times
+No.190, found same block: mksb, 1 times
+No.191, found same block: xqfo, 1 times
+No.192, found same block: cvrl, 1 times
+No.193, found same block: vrlm, 1 times
+No.194, found same block: rlmj, 1 times
+No.195, found same block: cngh, 1 times
+No.196, found same block: nghr, 1 times
+No.197, found same block: ghrt, 1 times
+No.198, found same block: pktp, 1 times
+No.199, found same block: ktpw, 1 times
+No.200, found same block: tpwz, 1 times
+No.201, found same block: ayzo, 1 times
+No.202, found same block: yzoa, 1 times
+No.203, found same block: hift, 1 times
+No.204, found same block: iftj, 1 times
+No.205, found same block: ftji, 1 times
+No.206, found same block: tjin, 1 times
+No.207, found same block: jinb, 1 times
+No.208, found same block: inbh, 1 times
+No.209, found same block: nbhw, 1 times
+No.210, found same block: bhwc, 1 times
+No.211, found same block: hwct, 1 times
+No.212, found same block: wcta, 1 times
+No.213, found same block: ctaf, 1 times
+No.214, found same block: tafi, 1 times
+No.215, found same block: afiy, 1 times
+No.216, found same block: fiyl, 1 times
+No.217, found same block: iylt, 1 times
+No.218, found same block: yltv, 1 times
+No.219, found same block: ltvq, 1 times
+No.220, found same block: tvqr, 1 times
+No.221, found same block: vqra, 1 times
+No.222, found same block: tmxl, 1 times
+No.223, found same block: mxlf, 1 times
+No.224, found same block: xlfj, 1 times
+No.225, found same block: lfjo, 1 times
+No.226, found same block: fjof, 1 times
+No.227, found same block: bhwr, 1 times
+No.228, found same block: hwrs, 1 times
+No.229, found same block: wrsr, 1 times
+No.230, found same block: rsru, 1 times
+No.231, found same block: gksv, 2 times
+No.232, found same block: gksv, 1 times
+No.233, found same block: ksvg, 1 times
+No.234, found same block: svgn, 1 times
+No.235, found same block: rlogv, 1 times
+No.236, found same block: logvb, 1 times
+No.237, found same block: ogvba, 1 times
+No.238, found same block: gqhpq, 1 times
+No.239, found same block: qhpqr, 1 times
+No.240, found same block: nntps, 1 times
+No.241, found same block: ntpsj, 1 times
+No.242, found same block: tpsjq, 1 times
+No.243, found same block: psjqt, 1 times
+No.244, found same block: ethpm, 1 times
+No.245, found same block: thpmb, 1 times
+No.246, found same block: hpmbj, 1 times
+No.247, found same block: pmbjk, 1 times
+No.248, found same block: mbjks, 1 times
+No.249, found same block: cvrlm, 1 times
+No.250, found same block: vrlmj, 1 times
+No.251, found same block: cnghr, 1 times
+No.252, found same block: nghrt, 1 times
+No.253, found same block: pktpw, 1 times
+No.254, found same block: ktpwz, 1 times
+No.255, found same block: ayzoa, 1 times
+No.256, found same block: hiftj, 1 times
+No.257, found same block: iftji, 1 times
+No.258, found same block: ftjin, 1 times
+No.259, found same block: tjinb, 1 times
+No.260, found same block: jinbh, 1 times
+No.261, found same block: inbhw, 1 times
+No.262, found same block: nbhwc, 1 times
+No.263, found same block: bhwct, 1 times
+No.264, found same block: hwcta, 1 times
+No.265, found same block: wctaf, 1 times
+No.266, found same block: ctafi, 1 times
+No.267, found same block: tafiy, 1 times
+No.268, found same block: afiyl, 1 times
+No.269, found same block: fiylt, 1 times
+No.270, found same block: iyltv, 1 times
+No.271, found same block: yltvq, 1 times
+No.272, found same block: ltvqr, 1 times
+No.273, found same block: tvqra, 1 times
+No.274, found same block: tmxlf, 1 times
+No.275, found same block: mxlfj, 1 times
+No.276, found same block: xlfjo, 1 times
+No.277, found same block: lfjof, 1 times
+No.278, found same block: bhwrs, 1 times
+No.279, found same block: hwrsr, 1 times
+No.280, found same block: wrsru, 1 times
+No.281, found same block: gksvg, 1 times
+No.282, found same block: ksvgn, 1 times
+No.283, found same block: rlogvb, 1 times
+No.284, found same block: logvba, 1 times
+No.285, found same block: gqhpqr, 1 times
+No.286, found same block: nntpsj, 1 times
+No.287, found same block: ntpsjq, 1 times
+No.288, found same block: tpsjqt, 1 times
+No.289, found same block: ethpmb, 1 times
+No.290, found same block: thpmbj, 1 times
+No.291, found same block: hpmbjk, 1 times
+No.292, found same block: pmbjks, 1 times
+No.293, found same block: cvrlmj, 1 times
+No.294, found same block: cnghrt, 1 times
+No.295, found same block: pktpwz, 1 times
+No.296, found same block: hiftji, 1 times
+No.297, found same block: iftjin, 1 times
+No.298, found same block: ftjinb, 1 times
+No.299, found same block: tjinbh, 1 times
+No.300, found same block: jinbhw, 1 times
+No.301, found same block: inbhwc, 1 times
+No.302, found same block: nbhwct, 1 times
+No.303, found same block: bhwcta, 1 times
+No.304, found same block: hwctaf, 1 times
+No.305, found same block: wctafi, 1 times
+No.306, found same block: ctafiy, 1 times
+No.307, found same block: tafiyl, 1 times
+No.308, found same block: afiylt, 1 times
+No.309, found same block: fiyltv, 1 times
+No.310, found same block: iyltvq, 1 times
+No.311, found same block: yltvqr, 1 times
+No.312, found same block: ltvqra, 1 times
+No.313, found same block: tmxlfj, 1 times
+No.314, found same block: mxlfjo, 1 times
+No.315, found same block: xlfjof, 1 times
+No.316, found same block: bhwrsr, 1 times
+No.317, found same block: hwrsru, 1 times
+No.318, found same block: gksvgn, 1 times
+No.319, found same block: rlogvba, 1 times
+No.320, found same block: nntpsjq, 1 times
+No.321, found same block: ntpsjqt, 1 times
+No.322, found same block: ethpmbj, 1 times
+No.323, found same block: thpmbjk, 1 times
+No.324, found same block: hpmbjks, 1 times
+No.325, found same block: hiftjin, 1 times
+No.326, found same block: iftjinb, 1 times
+No.327, found same block: ftjinbh, 1 times
+No.328, found same block: tjinbhw, 1 times
+No.329, found same block: jinbhwc, 1 times
+No.330, found same block: inbhwct, 1 times
+No.331, found same block: nbhwcta, 1 times
+No.332, found same block: bhwctaf, 1 times
+No.333, found same block: hwctafi, 1 times
+No.334, found same block: wctafiy, 1 times
+No.335, found same block: ctafiyl, 1 times
+No.336, found same block: tafiylt, 1 times
+No.337, found same block: afiyltv, 1 times
+No.338, found same block: fiyltvq, 1 times
+No.339, found same block: iyltvqr, 1 times
+No.340, found same block: yltvqra, 1 times
+No.341, found same block: tmxlfjo, 1 times
+No.342, found same block: mxlfjof, 1 times
+No.343, found same block: bhwrsru, 1 times
+No.344, found same block: nntpsjqt, 1 times
+No.345, found same block: ethpmbjk, 1 times
+No.346, found same block: thpmbjks, 1 times
+No.347, found same block: hiftjinb, 1 times
+No.348, found same block: iftjinbh, 1 times
+No.349, found same block: ftjinbhw, 1 times
+No.350, found same block: tjinbhwc, 1 times
+No.351, found same block: jinbhwct, 1 times
+No.352, found same block: inbhwcta, 1 times
+No.353, found same block: nbhwctaf, 1 times
+No.354, found same block: bhwctafi, 1 times
+No.355, found same block: hwctafiy, 1 times
+No.356, found same block: wctafiyl, 1 times
+No.357, found same block: ctafiylt, 1 times
+No.358, found same block: tafiyltv, 1 times
+No.359, found same block: afiyltvq, 1 times
+No.360, found same block: fiyltvqr, 1 times
+No.361, found same block: iyltvqra, 1 times
+No.362, found same block: tmxlfjof, 1 times
+No.363, found same block: ethpmbjks, 1 times
+No.364, found same block: hiftjinbh, 1 times
+No.365, found same block: iftjinbhw, 1 times
+No.366, found same block: ftjinbhwc, 1 times
+No.367, found same block: tjinbhwct, 1 times
+No.368, found same block: jinbhwcta, 1 times
+No.369, found same block: inbhwctaf, 1 times
+No.370, found same block: nbhwctafi, 1 times
+No.371, found same block: bhwctafiy, 1 times
+No.372, found same block: hwctafiyl, 1 times
+No.373, found same block: wctafiylt, 1 times
+No.374, found same block: ctafiyltv, 1 times
+No.375, found same block: tafiyltvq, 1 times
+No.376, found same block: afiyltvqr, 1 times
+No.377, found same block: fiyltvqra, 1 times
+No.378, found same block: hiftjinbhw, 1 times
+No.379, found same block: iftjinbhwc, 1 times
+No.380, found same block: ftjinbhwct, 1 times
+No.381, found same block: tjinbhwcta, 1 times
+No.382, found same block: jinbhwctaf, 1 times
+No.383, found same block: inbhwctafi, 1 times
+No.384, found same block: nbhwctafiy, 1 times
+No.385, found same block: bhwctafiyl, 1 times
+No.386, found same block: hwctafiylt, 1 times
+No.387, found same block: wctafiyltv, 1 times
+No.388, found same block: ctafiyltvq, 1 times
+No.389, found same block: tafiyltvqr, 1 times
+No.390, found same block: afiyltvqra, 1 times
+No.391, found same block: hiftjinbhwc, 1 times
+No.392, found same block: iftjinbhwct, 1 times
+No.393, found same block: ftjinbhwcta, 1 times
+No.394, found same block: tjinbhwctaf, 1 times
+No.395, found same block: jinbhwctafi, 1 times
+No.396, found same block: inbhwctafiy, 1 times
+No.397, found same block: nbhwctafiyl, 1 times
+No.398, found same block: bhwctafiylt, 1 times
+No.399, found same block: hwctafiyltv, 1 times
+No.400, found same block: wctafiyltvq, 1 times
+No.401, found same block: ctafiyltvqr, 1 times
+No.402, found same block: tafiyltvqra, 1 times
+No.403, found same block: hiftjinbhwct, 1 times
+No.404, found same block: iftjinbhwcta, 1 times
+No.405, found same block: ftjinbhwctaf, 1 times
+No.406, found same block: tjinbhwctafi, 1 times
+No.407, found same block: jinbhwctafiy, 1 times
+No.408, found same block: inbhwctafiyl, 1 times
+No.409, found same block: nbhwctafiylt, 1 times
+No.410, found same block: bhwctafiyltv, 1 times
+No.411, found same block: hwctafiyltvq, 1 times
+No.412, found same block: wctafiyltvqr, 1 times
+No.413, found same block: ctafiyltvqra, 1 times
+No.414, found same block: hiftjinbhwcta, 1 times
+No.415, found same block: iftjinbhwctaf, 1 times
+No.416, found same block: ftjinbhwctafi, 1 times
+No.417, found same block: tjinbhwctafiy, 1 times
+No.418, found same block: jinbhwctafiyl, 1 times
+No.419, found same block: inbhwctafiylt, 1 times
+No.420, found same block: nbhwctafiyltv, 1 times
+No.421, found same block: bhwctafiyltvq, 1 times
+No.422, found same block: hwctafiyltvqr, 1 times
+No.423, found same block: wctafiyltvqra, 1 times
+No.424, found same block: hiftjinbhwctaf, 1 times
+No.425, found same block: iftjinbhwctafi, 1 times
+No.426, found same block: ftjinbhwctafiy, 1 times
+No.427, found same block: tjinbhwctafiyl, 1 times
+No.428, found same block: jinbhwctafiylt, 1 times
+No.429, found same block: inbhwctafiyltv, 1 times
+No.430, found same block: nbhwctafiyltvq, 1 times
+No.431, found same block: bhwctafiyltvqr, 1 times
+No.432, found same block: hwctafiyltvqra, 1 times
+No.433, found same block: hiftjinbhwctafi, 1 times
+No.434, found same block: iftjinbhwctafiy, 1 times
+No.435, found same block: ftjinbhwctafiyl, 1 times
+No.436, found same block: tjinbhwctafiylt, 1 times
+No.437, found same block: jinbhwctafiyltv, 1 times
+No.438, found same block: inbhwctafiyltvq, 1 times
+No.439, found same block: nbhwctafiyltvqr, 1 times
+No.440, found same block: bhwctafiyltvqra, 1 times
+No.441, found same block: hiftjinbhwctafiy, 1 times
+No.442, found same block: iftjinbhwctafiyl, 1 times
+No.443, found same block: ftjinbhwctafiylt, 1 times
+No.444, found same block: tjinbhwctafiyltv, 1 times
+No.445, found same block: jinbhwctafiyltvq, 1 times
+No.446, found same block: inbhwctafiyltvqr, 1 times
+No.447, found same block: nbhwctafiyltvqra, 1 times
+No.448, found same block: hiftjinbhwctafiyl, 1 times
+No.449, found same block: iftjinbhwctafiylt, 1 times
+No.450, found same block: ftjinbhwctafiyltv, 1 times
+No.451, found same block: tjinbhwctafiyltvq, 1 times
+No.452, found same block: jinbhwctafiyltvqr, 1 times
+No.453, found same block: inbhwctafiyltvqra, 1 times
+No.454, found same block: hiftjinbhwctafiylt, 1 times
+No.455, found same block: iftjinbhwctafiyltv, 1 times
+No.456, found same block: ftjinbhwctafiyltvq, 1 times
+No.457, found same block: tjinbhwctafiyltvqr, 1 times
+No.458, found same block: jinbhwctafiyltvqra, 1 times
+No.459, found same block: hiftjinbhwctafiyltv, 1 times
+No.460, found same block: iftjinbhwctafiyltvq, 1 times
+No.461, found same block: ftjinbhwctafiyltvqr, 1 times
+No.462, found same block: tjinbhwctafiyltvqra, 1 times
+No.463, found same block: hiftjinbhwctafiyltvq, 1 times
+No.464, found same block: iftjinbhwctafiyltvqr, 1 times
+No.465, found same block: ftjinbhwctafiyltvqra, 1 times
+No.466, found same block: hiftjinbhwctafiyltvqr, 1 times
+No.467, found same block: iftjinbhwctafiyltvqra, 1 times
+No.468, found same block: hiftjinbhwctafiyltvqra, 1 times
+weight of 3: 11
+weight of 4: 8
+weight of 5: 5
+weight of 6: 6
+weight of 7: 3
+weight of 8: 2
+weight of 9: 2
+weight of 10: 3
+weight of 11: 22
+weight of 12: 3
+weight of 13: 4
+weight of 15: 2
+weight of 16: 1
+weight of 18: 2
+weight of 20: 2
+weight of 22: 8
+weight of 23: 5
+weight of 24: 1
+weight of 26: 1
+weight of 27: 2
+weight of 30: 1
+weight of 31: 1
+weight of 33: 6
+weight of 36: 1
+weight of 37: 2
+weight of 40: 1
+weight of 43: 1
+weight of 44: 2
+weight of 46: 2
+weight of 47: 2
+weight of 49: 1
+weight of 54: 2
+weight of 55: 3
+weight of 59: 1
+weight of 60: 1
+weight of 62: 1
+weight of 66: 2
+weight of 69: 4
+weight of 72: 1
+weight of 73: 3
+weight of 77: 1
+weight of 80: 1
+weight of 81: 1
+weight of 83: 1
+weight of 86: 1
+weight of 88: 1
+weight of 93: 1
+weight of 99: 1
+weight of 101: 1
+weight of 108: 1
+weight of 110: 2
+weight of 115: 1
+weight of 118: 1
+weight of 132: 1
+weight of 162: 1
+weight of 165: 1
+weight of 166: 1
+weight of 176: 1
+weight of 198: 1
+weight of 216: 1
+weight of 220: 2
+weight of 249: 1
+weight of 253: 3
+weight of 297: 1
+weight of 324: 1
+weight of 329: 1
+weight of 330: 1
+weight of 332: 1
+weight of 407: 1
+weight of 419: 1
+weight of 440: 1
+weight of 498: 1
+weight of 539: 1
+weight of 559: 1
+weight of 594: 1
+weight of 648: 1
+weight of 649: 1
+weight of 660: 1
+weight of 759: 3
+weight of 803: 3
+weight of 880: 1
+weight of 996: 1
+weight of 1118: 1
+weight of 1298: 1
+after calculating, keysize = 11
+decrype: ciphertext = bzmriwjtjgptvwourvngghlwaorngtvqrwxiboqpayrlitmfihticjizoieftimhnebwlnyqvoadeblqetfrlogvbaidozednphckmparvtnngqhpqrizspvsaoqfcmsegyimfkupmvrnntpsjqtxrlogvbaaeyxkezqrtqaiiythrfethpmbjksnhxmjaqvjiayyszvamnijwvvgpwaiewviafmksbqdgpwekxqfofhjcegvizgnfhjtoetiahwzdnegnntpsjqtnetuggqhpqryvxgnebwzunofhnprmkbdiyyezkyaavtixnoemtwdqsrfghvcmvnmztjutugxitcxawvcgcekjqfihrlpqqxgvqnyffgjidaoqnwvcvrlmjbteyiigjiuacecnghrtlwomhewfnyatzgdudjuactsojmesnmeekkqvizduieqkgbsjxexpsggqngzewnkcukrotmfwjvnpktpwzmluyaogxauqfayzoapimvmpwmrtvurwoszobeafvlmnqsesiepktpwziaxfrvimvstxyivsptmjwlnylzoicrjsbfixkaogptsaaisyifdswctmcnwrnfitkqsgnfvnpfilbusyrbrnpikwtegliyvyxgvfhjkaowpijmotfffgtmbzmyizjbhvelvmpawvprcxqfooozetrtwqyvmkjptbuaqlktcnghrtethpmbjksrxizqtqtyvrjjizwieaqseevmiflfrnkhromckceeirfvzilhiftjinbhwctafiyltvqratmxlfjofugpwuqmjrngvlmhiftjinbhwctafiyltvqrauwglisercwqdgohfegrfwqexxygpsrniklqzgfeejmigcmksbvrrvcxakmlqpsvpktwearijoeulwjbbhwrsruovgezttsogjtijbuexznnfzifkqowkrnpwuabfeifugqjjsvpaqfntymbzbtervsfckmtmxlfjofoibzwptmlsegucazqdxkrbpkawkgrnkysqvwftktmvkraeaabuswvlnvmdwtkefjygqwmucdefjhbtxswgbhwrsruegtgmpwvvvqyahzuvfkepqrdwzeayzoaditdieoxjyfviuoiectesvfizsjxyrfrruikmzqcnkagksvfmqdjubycmawlqvnxeatixmjxixyeqjmavmecwzpgksvgnmsndiycvjmbetwfntgvimbakjpcvrlmjjqftiegjikgcdttwhrpvgaquokwrnpgmavxayvrvpxpwbtcjethtcbzmunavngksvgnneqcafqwkaxtewnafomasbfrnsugghbgdugjeeeg, key = isimafrance 
+decrype: plaintext  = thefirstwelldocumenteddescriptionofapolyalphabeticcipherwasformulatedbyleonbattistaalbertiaroundandusedametalcipherdisctoswitchbetweencipheralphabetsalbertissystemonlyswitchedalphabetsafterseveralwordsandswitcheswereindicatedbywritingtheletterofthecorrespondingalphabetintheciphertextlaterinjohannestrithemiusinhisworkpoligraphiainventedthetabularectaacriticalcomponentofthevigenrecipherthetrithemiuscipherhoweveronlyprovidedaprogressiverigidandpredictablesystemforswitchingbetweencipheralphabetscitationneededwhatisnowknownasthevigenrecipherwasoriginallydescribedbygiovanbattistabellasoinhisbooklacifradelsiggiovanbattistabellasohebuiltuponthetabularectaoftrithemiusbutaddedarepeatingcountersignakeytoswitchcipheralphabetseveryletterwhereasalbertiandtrithemiususedafixedpatternofsubstitutionsbellasosschememeantthepatternofsubstitutionscouldbeeasilychangedsimplybyselectinganewkeykeysweretypicallysinglewordsorshortphrasesknowntobothpartiesinadvanceortransmittedoutofbandalongwiththemessagebellasosmethodthusrequiredstrongsecurityforonlythekeyasitisrelativelyeasytosecureashortkeyphrasesaybyapreviousprivateconversationbellasossystemwasconsiderablymoresecurecitationneededblaisedevigenrepublishedhisdescriptionofasimilarbutstrongerautokeycipherbeforethecourtofhenryiiioffranceinlaterinthethcenturytheinventionofbellasoscipherwasmisattributedtovigenere

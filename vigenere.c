@@ -6,10 +6,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Same_str{
+struct Same_Str{
   char str[1000];
-  int w;
-  int dist;
+  int  num;
+  int  start[1000];
+  int  end[1000];
 };
 
 void convert(char *origintext, char *plaintext)
@@ -33,6 +34,42 @@ void convert(char *origintext, char *plaintext)
     i++;
   }
   
+}
+void get_freq(char *plaintext, double m_fre[26])
+{
+  int i, pos;
+  int count;
+  count = strlen(plaintext);
+  for(i = 0; i < 26; i++)
+  {
+    m_fre[i] = 0;
+  }
+  i = 0;
+  while(plaintext[i] != '\0')
+  {
+    pos = (int)(plaintext[i] - 'a');
+    m_fre[pos]++;
+    i++;
+  }
+  
+  for(i = 0; i < 26; i++)
+  {
+
+    m_fre[i] = m_fre[i] / (double)count;
+  }
+
+}
+void show_freq(double m_fre[26])
+{
+  int i;
+  printf("-------------------------------------------\n");
+//  printf("frequency of plaintext: \n");
+  for(i = 0; i < 26; i++)
+  {
+    char c = (char)(i + (int)('a'));
+    printf("-> %c: %f%%\n", c, m_fre[i] * 100);
+  }
+  printf("-------------------------------------------\n");
 }
 void encrypt(char *plaintext, char *key, char *ciphertext)
 {
@@ -88,15 +125,14 @@ int get_key_size(char* ciphertext)
   int len = strlen(ciphertext);
   int *keysize = malloc(sizeof(int)*strlen(ciphertext));
   memset(keysize, 0, sizeof(int)*strlen(ciphertext));    // if possible key size is 27, set keysize[26]=1; 
-  k = 0;                                                 //the count of possible key_size
-  
-  //struct Same_str same_str[1000]; // malloc
-  //for( i = 0; i < 1000; i++)
-  //{
-  //  memset(same_str[i].str, '\0', strlen(same_str[i].str));
-  //  same_str[i].w    = 0;
-  //  same_str[i].dist = 0; 
-  //}
+  int malloc_size = 1000;
+  struct Same_Str *same_str = malloc(sizeof(struct Same_Str) * malloc_size);
+  int str_num;
+  str_num = 0;
+  for(i = 0; i < malloc_size; i++)
+  {
+    same_str[i].num = 0;
+  }
    
   char *block_1 = malloc(len);
   char *block_2 = malloc(len);
@@ -105,35 +141,38 @@ int get_key_size(char* ciphertext)
     int block_num = len -m;
     for(i = 0; i < block_num; i++)
     {
-      //char *block_1 = malloc(sizeof(char)*m + 2);
       memset(block_1, '\0', strlen(block_1));
       memcpy(block_1, ciphertext + i, m+1);
       int w = 0;                                           // weight
       for(j = i + 1 + m; j < block_num; j++)
       {
         if(j >= block_num) break;
-        //char *block_2 = malloc(sizeof(char)*m + 2);
         memset(block_2, '\0', strlen(block_2));
         memcpy(block_2, ciphertext + j, m+1);
         if(strcmp(block_1, block_2) == 0)
         {
-           printf("found same block: %s at %d and %d, size: %d\n", block_1, i, j, j-i);
-           keysize[k] = j-i;
            w++;
-           //strcpy(same_str[k].str, block_1);
-           //same_str[k].w    = w;
-           //same_str[k].dist = j - i; 
-           k++;
+        
+           int pos = same_str[str_num].num;
+           same_str[str_num].start[pos] = i;
+           same_str[str_num].end[pos]   = j;
+           same_str[str_num].num++;
 
         }
-       // free(block_2);
       }
       if(w > 0)
       {
-        printf("------>>>>>>found same block: %s, %d times\n",block_1,  w);
+        sprintf(same_str[str_num].str, "%s", block_1);
+        printf("No.%d, found same block: %s, %d times\n",str_num, same_str[str_num].str, same_str[str_num].num);
+        str_num++;
+        if(str_num >= malloc_size)
+        {
+          malloc_size += 1000;
+          same_str = realloc(same_str, sizeof(struct Same_Str) * malloc_size);
+        }
+    
       }
-      //free(block_1);
-      usleep(1);
+      //usleep(100);
     }
   }
 
@@ -141,12 +180,30 @@ int get_key_size(char* ciphertext)
   free(block_2);
 
 
-  /* clean same_str, find same block str, and add its weight*/
 
+  /* from code above, we know all possible key sizes (count: str_num), which are stored in same_str array */
 
-  //printf("here, m = %d i = %d j = %d\n", m ,i ,j);
-  /* from code above, we know all possible key sizes (count: k), which are stored in keysize array *
-   * if possible key size is 27, then keysize[26]=1;                                               */
+  /*if some strs whose replication time is more than 2, then it must be the REAL str*/
+  k = 0;
+  for(m = 0; m < str_num; m++ )
+  {
+    if(same_str[m].num >= 2)
+    {
+      /*the REAL str*/
+      for(r = 0; r < same_str[m].num; r++)
+      {
+        int start  = same_str[m].start[r];
+        int end    = same_str[m].end[r];
+      	keysize[k] = end - start;
+        k++;          
+      }
+    }
+    else
+    {
+    
+    }
+  
+  }
 
 
   /* get max number of key size, to malloc the array, each possible key size will be split as an   *
@@ -202,6 +259,7 @@ int get_key_size(char* ciphertext)
   free(keysize);
   free(weight);
   free(ptr);
+  free(same_str);
   return size;
 }
 
@@ -242,15 +300,16 @@ int main()
   char *plaintext;
   char *ciphertext;
   char *key;
+  double fre[26];
   int i;
   int keysize;
-  origintext = (char*) malloc(100);
+  origintext = (char*) malloc(1000);
   printf("please input origin text \n");
   for(i = 0; (*(origintext + i) = getchar()) != '\n'; i++)
   {
-    if((i+1) % 100 == 0)
+    if((i+1) % 1000 == 0)
     {
-      origintext = (char*)realloc(origintext, strlen(origintext) + 100);
+      origintext = (char*)realloc(origintext, strlen(origintext) + 1000);
     }
     
   }
@@ -258,6 +317,9 @@ int main()
   plaintext = (char*)malloc(strlen(origintext));   
   memset(plaintext, '\0', strlen(plaintext));
   convert(origintext, plaintext);
+  get_freq(plaintext, fre);
+  printf("frequency of plaintext: \n");
+  show_freq(fre);
 
   printf("please input the key\n");
   for(i = 0,key = (char*)malloc(1); (*(key + i) = getchar()) != '\n'; i++)
@@ -272,6 +334,12 @@ int main()
   encrypt(plaintext, key, ciphertext);
   printf("encrype: plaintext  = %s, key = %s\n", plaintext, key);
   printf("encrype: ciphertext = %s\n", ciphertext);
+
+  get_freq(ciphertext, fre);
+  printf("frequency of ciphertext: \n");
+  show_freq(fre);
+
+
   
   keysize = get_key_size(ciphertext);
   printf("after calculating, keysize = %d\n",keysize);
