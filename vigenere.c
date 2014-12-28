@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 struct Same_Str{
   char str[1000];
@@ -12,6 +13,26 @@ struct Same_Str{
   int  start[1000];
   int  end[1000];
 };
+
+
+double GetValueOft(unsigned int Num)
+{
+	double value[30] = {12.706, 4.303, 3.182, 2.766, 2.571, 2.447, 2.365, 2.308, 2.262, 2.228,
+                             2.201, 2.179, 2.160, 2.145, 2.131, 2.120, 2.110, 2.101, 2.093, 2.086,
+                             2.080, 2.074, 2.069, 2.064, 2.060, 2.056, 2.052, 2.048, 2.045, 2.042 };
+	if(Num>0 && Num<=30){
+		return value[Num-1];
+	}else if(Num<=40){
+		return 2.021;
+	}
+	else if(Num<=80){
+		return 2.000;
+	}else if(Num<=120){
+		return 1.980;
+	}else{
+	return 1.960;
+	}
+}
 
 void convert(char *origintext, char *plaintext)
 {
@@ -35,42 +56,65 @@ void convert(char *origintext, char *plaintext)
   }
   
 }
-void get_freq(char *plaintext, double m_fre[26])
+double anal_freq(char *text, double m_fre[26], double *Ke)
 {
   int i, pos;
   int count;
-  count = strlen(plaintext);
+  //double Ke;
+  double fre[26] = {0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228, 0.02015,
+                    0.06094, 0.06966, 0.00153, 0.00772, 0.04025, 0.02406, 0.06749, 
+                    0.07507, 0.01929, 0.00095,          0.05987, 0.06327, 0.09056,
+                    0.02758, 0.00978, 0.02360,          0.00150, 0.01974, 0.00074, };
+
+  /* the offset was set to verify that, no matter how    *
+   * you pick up a letter in an offset interval, the     *
+   * Ke results are always approximately equals to 0.067 */
+  int offset      = 1;
+
+  double variance = 0; // to estimate the quality of decryption text
+  count = strlen(text);
   for(i = 0; i < 26; i++)
   {
     m_fre[i] = 0;
   }
   i = 0;
-  while(plaintext[i] != '\0')
+  while(text[i] != '\0' && i < strlen(text))
   {
-    pos = (int)(plaintext[i] - 'a');
+    pos = (int)(text[i] - 'a');
     m_fre[pos]++;
-    i++;
+    //i++;
+    i = i + offset;
   }
-  
+  *Ke = 0;
   for(i = 0; i < 26; i++)
   {
+   *Ke += (m_fre[i] * (m_fre[i] - 1));
+  }
+  count = count / offset;
+  *Ke = *Ke / (double)(count * (count - 1));
 
+ 
+  //printf("-------------------------------------------\n");
+  for(i = 0; i < 26; i++)
+  {
     m_fre[i] = m_fre[i] / (double)count;
+    //char c = (char)(i + (int)('a'));
+    //printf("-> %c: %f%%\n", c, m_fre[i] * 100);
   }
+  //printf("The probability that two randomly chosen letters are the same: %2.4f\n",Ke);
+  //printf("-------------------------------------------\n");
 
-}
-void show_freq(double m_fre[26])
-{
-  int i;
-  printf("-------------------------------------------\n");
-//  printf("frequency of plaintext: \n");
+  /*calculate the variance*/  
   for(i = 0; i < 26; i++)
   {
-    char c = (char)(i + (int)('a'));
-    printf("-> %c: %f%%\n", c, m_fre[i] * 100);
-  }
-  printf("-------------------------------------------\n");
+    variance += pow((m_fre[i] - fre[i]), 2);
+  }  
+  variance = variance / (double)25;
+
+  return variance;
 }
+
+
 void encrypt(char *plaintext, char *key, char *ciphertext)
 {
   int    i   ;
@@ -263,8 +307,6 @@ int get_key_size(char* ciphertext)
   return size;
 }
 
-
-
 void decrypt(char *ciphertext, char *key, char* plaintext)
 {
   int    i   ;
@@ -280,7 +322,7 @@ void decrypt(char *ciphertext, char *key, char* plaintext)
       plaintext[i] = ciphertext[i] - offset + 26;
     }
     else
-    { 
+    {
       plaintext[i] = ciphertext[i] - offset;  //it seems that we can't modify plaintext
     }
     i++;
@@ -290,8 +332,51 @@ void decrypt(char *ciphertext, char *key, char* plaintext)
       j = 0;
     }
   }
+  plaintext[i] = '\0';
 
 }
+
+
+char find_each_key_letter(char *cipher)
+{
+  int i;
+  double variance[26];
+  double Ke[26];
+  char key;
+  double Std_Ke = 0.067;
+  double min = 10000; // set a very big value, to find a min
+  double min_Ke_off = 1;
+  char *plaintext = malloc(strlen(cipher) + 1);
+  for(i = 0; i < 26; i++)
+  {
+    char prob_key[2];
+    prob_key[0] = (char)(i + (int)('a'));
+    prob_key[1] = '\0';
+    double freq[26];
+    decrypt(cipher, prob_key, plaintext);
+    variance[i] = anal_freq(plaintext, freq, &Ke[i]);
+    //printf("probable key letter : %s, Ke = %f, variance = %f \n",prob_key,  Ke[i], variance[i]);
+
+    /*method 1: find the smallest variance*/
+    if(variance[i]< min )
+    {
+      key = prob_key[0];
+      min = variance[i];
+    }
+
+    /*method 2: find the closest Ke, this is wrong, because all the Ke are the same*/
+    /*double off = (Ke[i] - Std_Ke) > 0 ? (Ke[i] - Std_Ke) : (Std_Ke - Ke[i]);
+    if(off < min_Ke_off)
+    {
+      key = prob_key[0];
+      min_Ke_off = off;
+    }*/
+  }
+  free(plaintext);
+  return key;  // find the most probable key latter c.
+
+}
+
 int main()
 {
   //char *plaintext = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodplace";// if declare in this way , i can't modify it
@@ -299,9 +384,12 @@ int main()
   char *origintext;
   char *plaintext;
   char *ciphertext;
+  char **sepe_cipher;
   char *key;
+  char *p_key;
   double fre[26];
-  int i;
+  double Ke;
+  int i, j, m;
   int keysize;
   origintext = (char*) malloc(1000);
   printf("please input origin text \n");
@@ -317,14 +405,16 @@ int main()
   plaintext = (char*)malloc(strlen(origintext));   
   memset(plaintext, '\0', strlen(plaintext));
   convert(origintext, plaintext);
-  get_freq(plaintext, fre);
   printf("frequency of plaintext: \n");
-  show_freq(fre);
+  anal_freq(plaintext, fre, &Ke);
 
   printf("please input the key\n");
-  for(i = 0,key = (char*)malloc(1); (*(key + i) = getchar()) != '\n'; i++)
+  for(i = 0,key = (char*)malloc(100); (*(key + i) = getchar()) != '\n'; i++)
   {
-    key=(char*)realloc(key,strlen(key)+1);
+    if((i + 1) % 100 == 0)
+    {
+      key=(char*)realloc(key,strlen(key)+100);
+    }
   }
   *(key+i)='\0';
   
@@ -335,22 +425,58 @@ int main()
   printf("encrype: plaintext  = %s, key = %s\n", plaintext, key);
   printf("encrype: ciphertext = %s\n", ciphertext);
 
-  get_freq(ciphertext, fre);
   printf("frequency of ciphertext: \n");
-  show_freq(fre);
+  anal_freq(ciphertext, fre, &Ke);
 
 
   
   keysize = get_key_size(ciphertext);
   printf("after calculating, keysize = %d\n",keysize);
+  
+  //keysize = 5;
 
-  decrypt(ciphertext, key, plaintext);
-  printf("decrype: ciphertext = %s, key = %s \n", ciphertext, key);
+
+  p_key = malloc(keysize+1);
+  int len = 2 + strlen(ciphertext) / keysize;  // the length of each seperated ciphertext
+  sepe_cipher = (char **) malloc(keysize * sizeof(char *));
+  for(i = 0; i < keysize; i++)
+  {
+
+    /* set value for each seperated ciphertext*/
+    sepe_cipher[i] = malloc(len);
+    for(j = 0, m = 0; m < strlen(ciphertext); j++)
+    {
+      sepe_cipher[i][j] = ciphertext[m+i];
+      m = m + keysize;
+    }
+    sepe_cipher[i][j] = '\0';
+
+    /* find each most possible key letter (from a to z) for each seperated ciphertext*/
+
+    p_key[i] = find_each_key_letter(sepe_cipher[i]);
+    printf("find most probable key letter : %c\n", p_key[i]);
+  }
+  p_key[keysize] = '\0';
+
+  //p_key = malloc(keysize+1);
+  //printf("please inpute a possible key with a length of %d\n", keysize);
+  //scanf("%s", p_key);
+  //p_key[keysize] = '\0';
+
+
+  decrypt(ciphertext, p_key, plaintext);
+  printf("decrype: ciphertext = %s, probable key = %s \n", ciphertext, p_key);
   printf("decrype: plaintext  = %s\n", plaintext);
   
   free(origintext);
   free(plaintext);  
   free(ciphertext);
   free(key);
+  free(p_key);
+  for(i = 0; i < keysize; i++)
+  {
+    free(sepe_cipher[i]);
+  }
+  free(sepe_cipher);
   return 0;
 }
