@@ -1,5 +1,6 @@
 /* Written by Xiongmin Lin <linxiongmin@gmail.com>, ISIMA, Clermont-Ferrand *
- * (c) 2014. All rights reserved.                                           *                                           
+ * (c) 2014. All rights reserved.
+ *  This program is about how to encrytp and break viginere.                *                                           
  * http://sancy.univ-bpclermont.fr/~guitton/enseignements/admin.html        */
 
 #include <stdio.h>
@@ -7,6 +8,7 @@
 #include <string.h>
 #include <math.h>
 
+/* Same_Str struct is used to stored the information of the same strings in ciphertext */
 struct Same_Str{
   char str[1000];
   int  num;
@@ -15,24 +17,8 @@ struct Same_Str{
 };
 
 
-double GetValueOft(unsigned int Num)
-{
-	double value[30] = {12.706, 4.303, 3.182, 2.766, 2.571, 2.447, 2.365, 2.308, 2.262, 2.228,
-                             2.201, 2.179, 2.160, 2.145, 2.131, 2.120, 2.110, 2.101, 2.093, 2.086,
-                             2.080, 2.074, 2.069, 2.064, 2.060, 2.056, 2.052, 2.048, 2.045, 2.042 };
-	if(Num>0 && Num<=30){
-		return value[Num-1];
-	}else if(Num<=40){
-		return 2.021;
-	}
-	else if(Num<=80){
-		return 2.000;
-	}else if(Num<=120){
-		return 1.980;
-	}else{
-	return 1.960;
-	}
-}
+/* convert function is used to covert the original text to  plaintext, delete  *
+ * no-letter char and covert captical letter to lowercase                      */
 
 void convert(char *origintext, char *plaintext)
 {
@@ -56,23 +42,37 @@ void convert(char *origintext, char *plaintext)
   }
   
 }
+
+/* anal_freq function is used to analyze the text,
+   input: 
+   1. text to analyze
+   output: 
+   1. the frequency of each 26 letters ->m_fre[26]
+   2. The probability that two randomly chosen letters are the same -> Ke
+   3. return value: the variance, to estimate the quality of decryption test. */
+
 double anal_freq(char *text, double m_fre[26], double *Ke)
 {
   int i, pos;
   int count;
-  //double Ke;
+
+  /* the normal frequency for each 26 letters */
   double fre[26] = {0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228, 0.02015,
                     0.06094, 0.06966, 0.00153, 0.00772, 0.04025, 0.02406, 0.06749, 
                     0.07507, 0.01929, 0.00095,          0.05987, 0.06327, 0.09056,
                     0.02758, 0.00978, 0.02360,          0.00150, 0.01974, 0.00074, };
 
+
   /* the offset was set to verify that, no matter how    *
    * you pick up a letter in an offset interval, the     *
    * Ke results are always approximately equals to 0.067 */
+
   int offset      = 1;
 
   double variance = 0; // to estimate the quality of decryption text
   count = strlen(text);
+
+  /*get frequency of each letter; get Ke*/
   for(i = 0; i < 26; i++)
   {
     m_fre[i] = 0;
@@ -82,7 +82,6 @@ double anal_freq(char *text, double m_fre[26], double *Ke)
   {
     pos = (int)(text[i] - 'a');
     m_fre[pos]++;
-    //i++;
     i = i + offset;
   }
   *Ke = 0;
@@ -94,15 +93,11 @@ double anal_freq(char *text, double m_fre[26], double *Ke)
   *Ke = *Ke / (double)(count * (count - 1));
 
  
-  //printf("-------------------------------------------\n");
   for(i = 0; i < 26; i++)
   {
     m_fre[i] = m_fre[i] / (double)count;
-    //char c = (char)(i + (int)('a'));
-    //printf("-> %c: %f%%\n", c, m_fre[i] * 100);
   }
   //printf("The probability that two randomly chosen letters are the same: %2.4f\n",Ke);
-  //printf("-------------------------------------------\n");
 
   /*calculate the variance*/  
   for(i = 0; i < 26; i++)
@@ -114,6 +109,8 @@ double anal_freq(char *text, double m_fre[26], double *Ke)
   return variance;
 }
 
+
+/* encrypt function is used to encrypt the plaintext to ciphertext */
 
 void encrypt(char *plaintext, char *key, char *ciphertext)
 {
@@ -144,6 +141,14 @@ void encrypt(char *plaintext, char *key, char *ciphertext)
   }
 } 
 
+/* get_divisor is used to get the divisor of the number, for example, 15, the result should be 1, 2, 3, 5, 15 */
+/* input:                                                                                                     */
+/* 1. *p, to store the divisor numbers, for example, if number = 15, *p = 0000 0000 000 001                   */
+/* 2. num, number to be divisored                                                                             */
+/* output:                                                                                                    */
+/* 1. *p, after the function, the pos of divisor number will be set to 1, for example, number = 15            */
+/*    *p = 1110 1000 000 001                                                                                  */
+
 void get_divisor(int *p, int num)
 {
   int i;
@@ -158,10 +163,9 @@ void get_divisor(int *p, int num)
   
 }
 
-/* to avoid noice, get_key_size() calculates the weight of each possible keys and the result is    *
- * more precise than get_key_size_02, which just calculates the same divisor of all possible keys */
-/* the way i was used to calculate the weight was wrong, i should calculate the weight of same blocks, *
- * not divisors*/
+/* get_key_size function is used to calculate the keysize of the key                                         */
+/* to avoid noise, get_key_size() calculates the weight of each possible keys and the result is              */
+/* more precise than previous get_key_size(), which just calculates the same divisor of all possible keys    */
 int get_key_size(char* ciphertext)
 {
   int size = 0;
@@ -180,14 +184,14 @@ int get_key_size(char* ciphertext)
    
   char *block_1 = malloc(len);
   char *block_2 = malloc(len);
-  for(m = 2; m < len/2 ; m++)
+  for(m = 2; m < len/2 ; m++)  //m -> the length of blocks to be compared
   {
     int block_num = len -m;
     for(i = 0; i < block_num; i++)
     {
       memset(block_1, '\0', strlen(block_1));
       memcpy(block_1, ciphertext + i, m+1);
-      int w = 0;                                           // weight
+      int w = 0;                                           
       for(j = i + 1 + m; j < block_num; j++)
       {
         if(j >= block_num) break;
@@ -196,11 +200,11 @@ int get_key_size(char* ciphertext)
         if(strcmp(block_1, block_2) == 0)
         {
            w++;
-        
+    
            int pos = same_str[str_num].num;
            same_str[str_num].start[pos] = i;
            same_str[str_num].end[pos]   = j;
-           same_str[str_num].num++;
+           same_str[str_num].num++;           
 
         }
       }
@@ -231,7 +235,7 @@ int get_key_size(char* ciphertext)
   k = 0;
   for(m = 0; m < str_num; m++ )
   {
-    if(same_str[m].num >= 2)
+    if(same_str[m].num >= 2)  // just skip weak string, one replication string
     {
       /*the REAL str*/
       for(r = 0; r < same_str[m].num; r++)
@@ -241,10 +245,6 @@ int get_key_size(char* ciphertext)
       	keysize[k] = end - start;
         k++;          
       }
-    }
-    else
-    {
-    
     }
   
   }
@@ -307,6 +307,7 @@ int get_key_size(char* ciphertext)
   return size;
 }
 
+/*decrpty the viginer ciphertext*/
 void decrypt(char *ciphertext, char *key, char* plaintext)
 {
   int    i   ;
@@ -336,6 +337,11 @@ void decrypt(char *ciphertext, char *key, char* plaintext)
 
 }
 
+/* the find_each_key_letter function is used to find a most probable key letter for a given ciphertext  */
+/* if the probable key size is 5, then the find_each_key_letter function will be execute for 5 time     */
+/* input: seperated cipher text, for example, if peobable size is 5, then, the original ciphertext will */
+/*        be seperated into 5 parts, for all the letters in each part, their key letter are the same    */
+/* output: the most probable letter, which has the minimum variance                                     */
 
 char find_each_key_letter(char *cipher)
 {
@@ -379,8 +385,6 @@ char find_each_key_letter(char *cipher)
 
 int main()
 {
-  //char *plaintext = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodplace";// if declare in this way , i can't modify it
-  //char plaintext[100] = "helloisimaiamveryhappytoliveinthisverybeautifulcampusthisisaverygoodplace"; // OK
   char *origintext;
   char *plaintext;
   char *ciphertext;
@@ -391,6 +395,9 @@ int main()
   double Ke;
   int i, j, m;
   int keysize;
+
+
+  /*to get a viginer cipher, you should input the plaintext(the longer, the better)*/
   origintext = (char*) malloc(1000);
   printf("please input origin text \n");
   for(i = 0; (*(origintext + i) = getchar()) != '\n'; i++)
@@ -408,6 +415,9 @@ int main()
   printf("frequency of plaintext: \n");
   anal_freq(plaintext, fre, &Ke);
 
+
+  /*input the key string*/
+
   printf("please input the key\n");
   for(i = 0,key = (char*)malloc(100); (*(key + i) = getchar()) != '\n'; i++)
   {
@@ -417,10 +427,12 @@ int main()
     }
   }
   *(key+i)='\0';
+
   
+  /* encrypt the plaintext and get the ciphertext */
+
   ciphertext = malloc(strlen(plaintext) + 1);
-  memset(ciphertext, '\0', strlen(ciphertext));
-  
+  memset(ciphertext, '\0', strlen(ciphertext));  
   encrypt(plaintext, key, ciphertext);
   printf("encrype: plaintext  = %s, key = %s\n", plaintext, key);
   printf("encrype: ciphertext = %s\n", ciphertext);
@@ -429,13 +441,14 @@ int main()
   anal_freq(ciphertext, fre, &Ke);
 
 
-  
+
+  /* get the probable keysize of ciphertext */
   keysize = get_key_size(ciphertext);
   printf("after calculating, keysize = %d\n",keysize);
   
-  //keysize = 5;
 
 
+  /* find probable key string */
   p_key = malloc(keysize+1);
   int len = 2 + strlen(ciphertext) / keysize;  // the length of each seperated ciphertext
   sepe_cipher = (char **) malloc(keysize * sizeof(char *));
@@ -452,22 +465,20 @@ int main()
     sepe_cipher[i][j] = '\0';
 
     /* find each most possible key letter (from a to z) for each seperated ciphertext*/
-
     p_key[i] = find_each_key_letter(sepe_cipher[i]);
     printf("find most probable key letter : %c\n", p_key[i]);
   }
   p_key[keysize] = '\0';
 
-  //p_key = malloc(keysize+1);
-  //printf("please inpute a possible key with a length of %d\n", keysize);
-  //scanf("%s", p_key);
-  //p_key[keysize] = '\0';
 
 
+  /* decrypt the ciphertext using the probable key */
   decrypt(ciphertext, p_key, plaintext);
   printf("decrype: ciphertext = %s, probable key = %s \n", ciphertext, p_key);
   printf("decrype: plaintext  = %s\n", plaintext);
   
+
+  /* free the resource */
   free(origintext);
   free(plaintext);  
   free(ciphertext);
