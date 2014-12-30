@@ -11,9 +11,9 @@
 /* Same_Str struct is used to stored the information of the same strings in ciphertext */
 struct Same_Str{
   char str[1000];
-  int  num;
-  int  start[1000];
-  int  end[1000];
+  int  num;           // the repetition time of each string
+  int  start[1000];   //the start position of string
+  int  end[1000];     // the end position of string, distance = end[i] ¨C start[i], i stands for each repetition. 
 };
 
 
@@ -96,8 +96,9 @@ double anal_freq(char *text, double m_fre[26], double *Ke)
   for(i = 0; i < 26; i++)
   {
     m_fre[i] = m_fre[i] / (double)count;
+    //printf("the frequency of %c is %2.4f%%\n", (char)(i + (int)'a'), 100 * m_fre[i]);
   }
-  //printf("The probability that two randomly chosen letters are the same: %2.4f\n",Ke);
+  //printf("The probability that two randomly chosen letters are the same: %2.4f\n",*Ke);
 
   /*calculate the variance*/  
   for(i = 0; i < 26; i++)
@@ -168,6 +169,8 @@ void get_divisor(int *p, int num)
 /* more precise than previous get_key_size(), which just calculates the same divisor of all possible keys    */
 int get_key_size(char* ciphertext)
 {
+  /* step 1: initialize work*/
+
   int size = 0;
   int i, j, m, k, r;
   int len = strlen(ciphertext);
@@ -181,7 +184,9 @@ int get_key_size(char* ciphertext)
   {
     same_str[i].num = 0;
   }
-   
+
+  /* step 2: compare each string, find the same string and store the information into Same_Str struct*/ 
+
   char *block_1 = malloc(len);
   char *block_2 = malloc(len);
   for(m = 2; m < len/2 ; m++)  //m -> the length of blocks to be compared
@@ -227,10 +232,9 @@ int get_key_size(char* ciphertext)
   free(block_1);
   free(block_2);
 
-
+   /* step 3: removed the letters whose repetitions were less than 2 times */
 
   /* from code above, we know all possible key sizes (count: str_num), which are stored in same_str array */
-
   /*if some strs whose replication time is more than 2, then it must be the REAL str*/
   k = 0;
   for(m = 0; m < str_num; m++ )
@@ -249,6 +253,7 @@ int get_key_size(char* ciphertext)
   
   }
 
+  /*step 4: get the divisors of each distance and calculate their weight */
 
   /* get max number of key size, to malloc the array, each possible key size will be split as an   *
    * array ptr[i] and be added with an all-0 array: weight, from the weight of each key, we know   *
@@ -281,8 +286,10 @@ int get_key_size(char* ciphertext)
        weight[j] = weight[j] + ptr[i][j];
      }
   }
+
+  /*step 5, get the most probable length of key words through weight information*/
+
   int max_weight = 0;
-  
   for(j = 0; j < max; j++)
   {
     if(weight[j] != 0)
@@ -295,7 +302,9 @@ int get_key_size(char* ciphertext)
       max_weight = weight[j];
     }
   }
-  
+    
+  /*step 6, free resources*/
+
   for(i = 0; i < k; i++)
   {
     free(ptr[i]);
@@ -412,7 +421,7 @@ int main()
   plaintext = (char*)malloc(strlen(origintext));   
   memset(plaintext, '\0', strlen(plaintext));
   convert(origintext, plaintext);
-  printf("frequency of plaintext: \n");
+  //printf("frequency of plaintext: \n");
   anal_freq(plaintext, fre, &Ke);
 
 
@@ -437,7 +446,7 @@ int main()
   printf("encrype: plaintext  = %s, key = %s\n", plaintext, key);
   printf("encrype: ciphertext = %s\n", ciphertext);
 
-  printf("frequency of ciphertext: \n");
+  //printf("frequency of ciphertext: \n");
   anal_freq(ciphertext, fre, &Ke);
 
 
@@ -469,7 +478,7 @@ int main()
     printf("find most probable key letter : %c\n", p_key[i]);
   }
   p_key[keysize] = '\0';
-
+  printf("--->>> after calculation, the most probable key word is: %s\n", p_key);
 
 
   /* decrypt the ciphertext using the probable key */
